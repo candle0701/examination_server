@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examination.mapper.WrongsMapper">
+  <resultMap id="BaseResultMap" type="com.examination.model.Wrongs">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="completion_id" jdbcType="INTEGER" property="completionId" />
+    <result column="choice_id" jdbcType="INTEGER" property="choiceId" />
+    <result column="judge_id" jdbcType="INTEGER" property="judgeId" />
+    <result column="queans_id" jdbcType="INTEGER" property="queansId" />
+    <result column="wrong_date" jdbcType="TIMESTAMP" property="wrongDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, completion_id, choice_id, judge_id, queans_id, wrong_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wrongs
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wrongs
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.examination.model.Wrongs">
+    insert into wrongs (id, user_id, completion_id, 
+      choice_id, judge_id, queans_id, 
+      wrong_date)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{completionId,jdbcType=INTEGER}, 
+      #{choiceId,jdbcType=INTEGER}, #{judgeId,jdbcType=INTEGER}, #{queansId,jdbcType=INTEGER}, 
+      #{wrongDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.examination.model.Wrongs">
+    insert into wrongs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="completionId != null">
+        completion_id,
+      </if>
+      <if test="choiceId != null">
+        choice_id,
+      </if>
+      <if test="judgeId != null">
+        judge_id,
+      </if>
+      <if test="queansId != null">
+        queans_id,
+      </if>
+      <if test="wrongDate != null">
+        wrong_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="completionId != null">
+        #{completionId,jdbcType=INTEGER},
+      </if>
+      <if test="choiceId != null">
+        #{choiceId,jdbcType=INTEGER},
+      </if>
+      <if test="judgeId != null">
+        #{judgeId,jdbcType=INTEGER},
+      </if>
+      <if test="queansId != null">
+        #{queansId,jdbcType=INTEGER},
+      </if>
+      <if test="wrongDate != null">
+        #{wrongDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.examination.model.Wrongs">
+    update wrongs
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="completionId != null">
+        completion_id = #{completionId,jdbcType=INTEGER},
+      </if>
+      <if test="choiceId != null">
+        choice_id = #{choiceId,jdbcType=INTEGER},
+      </if>
+      <if test="judgeId != null">
+        judge_id = #{judgeId,jdbcType=INTEGER},
+      </if>
+      <if test="queansId != null">
+        queans_id = #{queansId,jdbcType=INTEGER},
+      </if>
+      <if test="wrongDate != null">
+        wrong_date = #{wrongDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.examination.model.Wrongs">
+    update wrongs
+    set user_id = #{userId,jdbcType=VARCHAR},
+      completion_id = #{completionId,jdbcType=INTEGER},
+      choice_id = #{choiceId,jdbcType=INTEGER},
+      judge_id = #{judgeId,jdbcType=INTEGER},
+      queans_id = #{queansId,jdbcType=INTEGER},
+      wrong_date = #{wrongDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

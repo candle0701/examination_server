@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examination.mapper.QueansMapper">
+  <resultMap id="BaseResultMap" type="com.examination.model.Queans">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="queans_answer" jdbcType="VARCHAR" property="queansAnswer" />
+    <result column="queans_title" jdbcType="VARCHAR" property="queansTitle" />
+    <result column="queans_sort" jdbcType="INTEGER" property="queansSort" />
+    <result column="queans_img1" jdbcType="VARCHAR" property="queansImg1" />
+    <result column="queans_img2" jdbcType="VARCHAR" property="queansImg2" />
+    <result column="queans_img3" jdbcType="VARCHAR" property="queansImg3" />
+    <result column="queans_img4" jdbcType="VARCHAR" property="queansImg4" />
+    <result column="queans_img5" jdbcType="VARCHAR" property="queansImg5" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, queans_answer, queans_title, queans_sort, queans_img1, queans_img2, queans_img3, 
+    queans_img4, queans_img5, grade
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from queans
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from queans
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.examination.model.Queans">
+    insert into queans (id, queans_answer, queans_title, 
+      queans_sort, queans_img1, queans_img2, 
+      queans_img3, queans_img4, queans_img5, 
+      grade)
+    values (#{id,jdbcType=VARCHAR}, #{queansAnswer,jdbcType=VARCHAR}, #{queansTitle,jdbcType=VARCHAR}, 
+      #{queansSort,jdbcType=INTEGER}, #{queansImg1,jdbcType=VARCHAR}, #{queansImg2,jdbcType=VARCHAR}, 
+      #{queansImg3,jdbcType=VARCHAR}, #{queansImg4,jdbcType=VARCHAR}, #{queansImg5,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.examination.model.Queans">
+    insert into queans
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="queansAnswer != null">
+        queans_answer,
+      </if>
+      <if test="queansTitle != null">
+        queans_title,
+      </if>
+      <if test="queansSort != null">
+        queans_sort,
+      </if>
+      <if test="queansImg1 != null">
+        queans_img1,
+      </if>
+      <if test="queansImg2 != null">
+        queans_img2,
+      </if>
+      <if test="queansImg3 != null">
+        queans_img3,
+      </if>
+      <if test="queansImg4 != null">
+        queans_img4,
+      </if>
+      <if test="queansImg5 != null">
+        queans_img5,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="queansAnswer != null">
+        #{queansAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="queansTitle != null">
+        #{queansTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="queansSort != null">
+        #{queansSort,jdbcType=INTEGER},
+      </if>
+      <if test="queansImg1 != null">
+        #{queansImg1,jdbcType=VARCHAR},
+      </if>
+      <if test="queansImg2 != null">
+        #{queansImg2,jdbcType=VARCHAR},
+      </if>
+      <if test="queansImg3 != null">
+        #{queansImg3,jdbcType=VARCHAR},
+      </if>
+      <if test="queansImg4 != null">
+        #{queansImg4,jdbcType=VARCHAR},
+      </if>
+      <if test="queansImg5 != null">
+        #{queansImg5,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.examination.model.Queans">
+    update queans
+    <set>
+      <if test="queansAnswer != null">
+        queans_answer = #{queansAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="queansTitle != null">
+        queans_title = #{queansTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="queansSort != null">
+        queans_sort = #{queansSort,jdbcType=INTEGER},
+      </if>
+      <if test="queansImg1 != null">
+        queans_img1 = #{queansImg1,jdbcType=VARCHAR},
+      </if>
+      <if test="queansImg2 != null">
+        queans_img2 = #{queansImg2,jdbcType=VARCHAR},
+      </if>
+      <if test="queansImg3 != null">
+        queans_img3 = #{queansImg3,jdbcType=VARCHAR},
+      </if>
+      <if test="queansImg4 != null">
+        queans_img4 = #{queansImg4,jdbcType=VARCHAR},
+      </if>
+      <if test="queansImg5 != null">
+        queans_img5 = #{queansImg5,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.examination.model.Queans">
+    update queans
+    set queans_answer = #{queansAnswer,jdbcType=VARCHAR},
+      queans_title = #{queansTitle,jdbcType=VARCHAR},
+      queans_sort = #{queansSort,jdbcType=INTEGER},
+      queans_img1 = #{queansImg1,jdbcType=VARCHAR},
+      queans_img2 = #{queansImg2,jdbcType=VARCHAR},
+      queans_img3 = #{queansImg3,jdbcType=VARCHAR},
+      queans_img4 = #{queansImg4,jdbcType=VARCHAR},
+      queans_img5 = #{queansImg5,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

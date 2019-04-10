@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examination.mapper.CompletionMapper">
+  <resultMap id="BaseResultMap" type="com.examination.model.Completion">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="completion_title" jdbcType="VARCHAR" property="completionTitle" />
+    <result column="completion_answer" jdbcType="VARCHAR" property="completionAnswer" />
+    <result column="completion_sort" jdbcType="INTEGER" property="completionSort" />
+    <result column="completion_img1" jdbcType="VARCHAR" property="completionImg1" />
+    <result column="completion_img2" jdbcType="VARCHAR" property="completionImg2" />
+    <result column="completion_img3" jdbcType="VARCHAR" property="completionImg3" />
+    <result column="completion_img4" jdbcType="VARCHAR" property="completionImg4" />
+    <result column="completion_img5" jdbcType="VARCHAR" property="completionImg5" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, completion_title, completion_answer, completion_sort, completion_img1, completion_img2, 
+    completion_img3, completion_img4, completion_img5, grade
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from completion
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from completion
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.examination.model.Completion">
+    insert into completion (id, completion_title, completion_answer, 
+      completion_sort, completion_img1, completion_img2, 
+      completion_img3, completion_img4, completion_img5, 
+      grade)
+    values (#{id,jdbcType=VARCHAR}, #{completionTitle,jdbcType=VARCHAR}, #{completionAnswer,jdbcType=VARCHAR}, 
+      #{completionSort,jdbcType=INTEGER}, #{completionImg1,jdbcType=VARCHAR}, #{completionImg2,jdbcType=VARCHAR}, 
+      #{completionImg3,jdbcType=VARCHAR}, #{completionImg4,jdbcType=VARCHAR}, #{completionImg5,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.examination.model.Completion">
+    insert into completion
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="completionTitle != null">
+        completion_title,
+      </if>
+      <if test="completionAnswer != null">
+        completion_answer,
+      </if>
+      <if test="completionSort != null">
+        completion_sort,
+      </if>
+      <if test="completionImg1 != null">
+        completion_img1,
+      </if>
+      <if test="completionImg2 != null">
+        completion_img2,
+      </if>
+      <if test="completionImg3 != null">
+        completion_img3,
+      </if>
+      <if test="completionImg4 != null">
+        completion_img4,
+      </if>
+      <if test="completionImg5 != null">
+        completion_img5,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="completionTitle != null">
+        #{completionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="completionAnswer != null">
+        #{completionAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="completionSort != null">
+        #{completionSort,jdbcType=INTEGER},
+      </if>
+      <if test="completionImg1 != null">
+        #{completionImg1,jdbcType=VARCHAR},
+      </if>
+      <if test="completionImg2 != null">
+        #{completionImg2,jdbcType=VARCHAR},
+      </if>
+      <if test="completionImg3 != null">
+        #{completionImg3,jdbcType=VARCHAR},
+      </if>
+      <if test="completionImg4 != null">
+        #{completionImg4,jdbcType=VARCHAR},
+      </if>
+      <if test="completionImg5 != null">
+        #{completionImg5,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.examination.model.Completion">
+    update completion
+    <set>
+      <if test="completionTitle != null">
+        completion_title = #{completionTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="completionAnswer != null">
+        completion_answer = #{completionAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="completionSort != null">
+        completion_sort = #{completionSort,jdbcType=INTEGER},
+      </if>
+      <if test="completionImg1 != null">
+        completion_img1 = #{completionImg1,jdbcType=VARCHAR},
+      </if>
+      <if test="completionImg2 != null">
+        completion_img2 = #{completionImg2,jdbcType=VARCHAR},
+      </if>
+      <if test="completionImg3 != null">
+        completion_img3 = #{completionImg3,jdbcType=VARCHAR},
+      </if>
+      <if test="completionImg4 != null">
+        completion_img4 = #{completionImg4,jdbcType=VARCHAR},
+      </if>
+      <if test="completionImg5 != null">
+        completion_img5 = #{completionImg5,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.examination.model.Completion">
+    update completion
+    set completion_title = #{completionTitle,jdbcType=VARCHAR},
+      completion_answer = #{completionAnswer,jdbcType=VARCHAR},
+      completion_sort = #{completionSort,jdbcType=INTEGER},
+      completion_img1 = #{completionImg1,jdbcType=VARCHAR},
+      completion_img2 = #{completionImg2,jdbcType=VARCHAR},
+      completion_img3 = #{completionImg3,jdbcType=VARCHAR},
+      completion_img4 = #{completionImg4,jdbcType=VARCHAR},
+      completion_img5 = #{completionImg5,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examination.mapper.JudgeMapper">
+  <resultMap id="BaseResultMap" type="com.examination.model.Judge">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="judge_title" jdbcType="VARCHAR" property="judgeTitle" />
+    <result column="judge_answer" jdbcType="VARCHAR" property="judgeAnswer" />
+    <result column="judge_sort" jdbcType="INTEGER" property="judgeSort" />
+    <result column="judge_img1" jdbcType="VARCHAR" property="judgeImg1" />
+    <result column="judge_img2" jdbcType="VARCHAR" property="judgeImg2" />
+    <result column="judge_img3" jdbcType="VARCHAR" property="judgeImg3" />
+    <result column="judge_img4" jdbcType="VARCHAR" property="judgeImg4" />
+    <result column="judge_img5" jdbcType="VARCHAR" property="judgeImg5" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, judge_title, judge_answer, judge_sort, judge_img1, judge_img2, judge_img3, judge_img4, 
+    judge_img5, grade
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from judge
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from judge
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.examination.model.Judge">
+    insert into judge (id, judge_title, judge_answer, 
+      judge_sort, judge_img1, judge_img2, 
+      judge_img3, judge_img4, judge_img5, 
+      grade)
+    values (#{id,jdbcType=VARCHAR}, #{judgeTitle,jdbcType=VARCHAR}, #{judgeAnswer,jdbcType=VARCHAR}, 
+      #{judgeSort,jdbcType=INTEGER}, #{judgeImg1,jdbcType=VARCHAR}, #{judgeImg2,jdbcType=VARCHAR}, 
+      #{judgeImg3,jdbcType=VARCHAR}, #{judgeImg4,jdbcType=VARCHAR}, #{judgeImg5,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.examination.model.Judge">
+    insert into judge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="judgeTitle != null">
+        judge_title,
+      </if>
+      <if test="judgeAnswer != null">
+        judge_answer,
+      </if>
+      <if test="judgeSort != null">
+        judge_sort,
+      </if>
+      <if test="judgeImg1 != null">
+        judge_img1,
+      </if>
+      <if test="judgeImg2 != null">
+        judge_img2,
+      </if>
+      <if test="judgeImg3 != null">
+        judge_img3,
+      </if>
+      <if test="judgeImg4 != null">
+        judge_img4,
+      </if>
+      <if test="judgeImg5 != null">
+        judge_img5,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeTitle != null">
+        #{judgeTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeAnswer != null">
+        #{judgeAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeSort != null">
+        #{judgeSort,jdbcType=INTEGER},
+      </if>
+      <if test="judgeImg1 != null">
+        #{judgeImg1,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeImg2 != null">
+        #{judgeImg2,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeImg3 != null">
+        #{judgeImg3,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeImg4 != null">
+        #{judgeImg4,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeImg5 != null">
+        #{judgeImg5,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.examination.model.Judge">
+    update judge
+    <set>
+      <if test="judgeTitle != null">
+        judge_title = #{judgeTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeAnswer != null">
+        judge_answer = #{judgeAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeSort != null">
+        judge_sort = #{judgeSort,jdbcType=INTEGER},
+      </if>
+      <if test="judgeImg1 != null">
+        judge_img1 = #{judgeImg1,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeImg2 != null">
+        judge_img2 = #{judgeImg2,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeImg3 != null">
+        judge_img3 = #{judgeImg3,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeImg4 != null">
+        judge_img4 = #{judgeImg4,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeImg5 != null">
+        judge_img5 = #{judgeImg5,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.examination.model.Judge">
+    update judge
+    set judge_title = #{judgeTitle,jdbcType=VARCHAR},
+      judge_answer = #{judgeAnswer,jdbcType=VARCHAR},
+      judge_sort = #{judgeSort,jdbcType=INTEGER},
+      judge_img1 = #{judgeImg1,jdbcType=VARCHAR},
+      judge_img2 = #{judgeImg2,jdbcType=VARCHAR},
+      judge_img3 = #{judgeImg3,jdbcType=VARCHAR},
+      judge_img4 = #{judgeImg4,jdbcType=VARCHAR},
+      judge_img5 = #{judgeImg5,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

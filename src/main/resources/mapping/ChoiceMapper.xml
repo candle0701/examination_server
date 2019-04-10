@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examination.mapper.ChoiceMapper">
+  <resultMap id="BaseResultMap" type="com.examination.model.Choice">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="choice_title_a" jdbcType="VARCHAR" property="choiceTitleA" />
+    <result column="choice_title_b" jdbcType="VARCHAR" property="choiceTitleB" />
+    <result column="choice_title_c" jdbcType="VARCHAR" property="choiceTitleC" />
+    <result column="choice_title_d" jdbcType="VARCHAR" property="choiceTitleD" />
+    <result column="choice_title_e" jdbcType="VARCHAR" property="choiceTitleE" />
+    <result column="choice_title_f" jdbcType="VARCHAR" property="choiceTitleF" />
+    <result column="choice_title_g" jdbcType="VARCHAR" property="choiceTitleG" />
+    <result column="choice_title_h" jdbcType="VARCHAR" property="choiceTitleH" />
+    <result column="choice_title_i" jdbcType="VARCHAR" property="choiceTitleI" />
+    <result column="choice_answer" jdbcType="VARCHAR" property="choiceAnswer" />
+    <result column="choice_sort" jdbcType="INTEGER" property="choiceSort" />
+    <result column="choice_img1" jdbcType="VARCHAR" property="choiceImg1" />
+    <result column="choice_img2" jdbcType="VARCHAR" property="choiceImg2" />
+    <result column="choice_img3" jdbcType="VARCHAR" property="choiceImg3" />
+    <result column="choice_img4" jdbcType="VARCHAR" property="choiceImg4" />
+    <result column="choice_img5" jdbcType="VARCHAR" property="choiceImg5" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+  </resultMap>
+  <insert id="insert" parameterType="com.examination.model.Choice">
+    insert into choice (id, choice_title_a, choice_title_b, 
+      choice_title_c, choice_title_d, choice_title_e, 
+      choice_title_f, choice_title_g, choice_title_h, 
+      choice_title_i, choice_answer, choice_sort, 
+      choice_img1, choice_img2, choice_img3, 
+      choice_img4, choice_img5, grade
+      )
+    values (#{id,jdbcType=VARCHAR}, #{choiceTitleA,jdbcType=VARCHAR}, #{choiceTitleB,jdbcType=VARCHAR}, 
+      #{choiceTitleC,jdbcType=VARCHAR}, #{choiceTitleD,jdbcType=VARCHAR}, #{choiceTitleE,jdbcType=VARCHAR}, 
+      #{choiceTitleF,jdbcType=VARCHAR}, #{choiceTitleG,jdbcType=VARCHAR}, #{choiceTitleH,jdbcType=VARCHAR}, 
+      #{choiceTitleI,jdbcType=VARCHAR}, #{choiceAnswer,jdbcType=VARCHAR}, #{choiceSort,jdbcType=INTEGER}, 
+      #{choiceImg1,jdbcType=VARCHAR}, #{choiceImg2,jdbcType=VARCHAR}, #{choiceImg3,jdbcType=VARCHAR}, 
+      #{choiceImg4,jdbcType=VARCHAR}, #{choiceImg5,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.examination.model.Choice">
+    insert into choice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="choiceTitleA != null">
+        choice_title_a,
+      </if>
+      <if test="choiceTitleB != null">
+        choice_title_b,
+      </if>
+      <if test="choiceTitleC != null">
+        choice_title_c,
+      </if>
+      <if test="choiceTitleD != null">
+        choice_title_d,
+      </if>
+      <if test="choiceTitleE != null">
+        choice_title_e,
+      </if>
+      <if test="choiceTitleF != null">
+        choice_title_f,
+      </if>
+      <if test="choiceTitleG != null">
+        choice_title_g,
+      </if>
+      <if test="choiceTitleH != null">
+        choice_title_h,
+      </if>
+      <if test="choiceTitleI != null">
+        choice_title_i,
+      </if>
+      <if test="choiceAnswer != null">
+        choice_answer,
+      </if>
+      <if test="choiceSort != null">
+        choice_sort,
+      </if>
+      <if test="choiceImg1 != null">
+        choice_img1,
+      </if>
+      <if test="choiceImg2 != null">
+        choice_img2,
+      </if>
+      <if test="choiceImg3 != null">
+        choice_img3,
+      </if>
+      <if test="choiceImg4 != null">
+        choice_img4,
+      </if>
+      <if test="choiceImg5 != null">
+        choice_img5,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceTitleA != null">
+        #{choiceTitleA,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceTitleB != null">
+        #{choiceTitleB,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceTitleC != null">
+        #{choiceTitleC,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceTitleD != null">
+        #{choiceTitleD,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceTitleE != null">
+        #{choiceTitleE,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceTitleF != null">
+        #{choiceTitleF,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceTitleG != null">
+        #{choiceTitleG,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceTitleH != null">
+        #{choiceTitleH,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceTitleI != null">
+        #{choiceTitleI,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceAnswer != null">
+        #{choiceAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceSort != null">
+        #{choiceSort,jdbcType=INTEGER},
+      </if>
+      <if test="choiceImg1 != null">
+        #{choiceImg1,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceImg2 != null">
+        #{choiceImg2,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceImg3 != null">
+        #{choiceImg3,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceImg4 != null">
+        #{choiceImg4,jdbcType=VARCHAR},
+      </if>
+      <if test="choiceImg5 != null">
+        #{choiceImg5,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
