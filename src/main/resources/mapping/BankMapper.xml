@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.examination.mapper.BankMapper">
+  <resultMap id="BaseResultMap" type="com.examination.model.Bank">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="zone" jdbcType="VARCHAR" property="zone" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="opendate" jdbcType="VARCHAR" property="opendate" />
+    <result column="question_type" jdbcType="INTEGER" property="questionType" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, zone, title, opendate, question_type, grade,url
+  </sql>
+  <select id="selectByDate" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bank
+    <if test="beginDate != null and endDate != null" >
+      where str_to_date(opendate, '%Y-%m-%d') &gt; #{beginDate} and str_to_date(opendate, '%Y-%m-%d') &lt; #{endDate}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.examination.model.BankKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bank
+    where id = #{id,jdbcType=VARCHAR}
+      and zone = #{zone,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.examination.model.BankKey">
+    delete from bank
+    where id = #{id,jdbcType=VARCHAR}
+      and zone = #{zone,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.examination.model.Bank">
+    insert into bank (id, zone, title, 
+      opendate, question_type, grade,url
+      )
+    values (#{id,jdbcType=VARCHAR}, #{zone,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{opendate,jdbcType=VARCHAR}, #{questionType,jdbcType=INTEGER}, #{grade,jdbcType=VARCHAR},#{url,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.examination.model.Bank">
+    insert into bank
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="zone != null">
+        zone,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="opendate != null">
+        opendate,
+      </if>
+      <if test="questionType != null">
+        question_type,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="zone != null">
+        #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="opendate != null">
+        #{opendate,jdbcType=VARCHAR},
+      </if>
+      <if test="questionType != null">
+        #{questionType,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.examination.model.Bank">
+    update bank
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="opendate != null">
+        opendate = #{opendate,jdbcType=VARCHAR},
+      </if>
+      <if test="questionType != null">
+        question_type = #{questionType,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+      and zone = #{zone,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.examination.model.Bank">
+    update bank
+    set title = #{title,jdbcType=VARCHAR},
+      opendate = #{opendate,jdbcType=VARCHAR},
+      question_type = #{questionType,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+    where id = #{id,jdbcType=VARCHAR}
+      and zone = #{zone,jdbcType=VARCHAR}
+  </update>
+</mapper>
