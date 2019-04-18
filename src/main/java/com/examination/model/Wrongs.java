@@ -1,21 +1,41 @@
 package com.examination.model;
 
-import java.util.Date;
-
 public class Wrongs {
     private String id;
 
     private String userId;
 
-    private Integer completionId;
+    private String completionId;
 
-    private Integer choiceId;
+    private String choiceId;
 
-    private Integer judgeId;
+    private String judgeId;
 
-    private Integer queansId;
+    private String queansId;
 
-    private Date wrongDate;
+    private String examtime;
+
+    private String answer;
+
+    private String bankId;
+
+    private String wrongsum;
+
+    public String getWrongsum() {
+        return wrongsum;
+    }
+
+    public void setWrongsum(String wrongsum) {
+        this.wrongsum = wrongsum;
+    }
+
+    public String getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(String bankId) {
+        this.bankId = bankId;
+    }
 
     public String getId() {
         return id;
@@ -33,43 +53,51 @@ public class Wrongs {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public Integer getCompletionId() {
+    public String getCompletionId() {
         return completionId;
     }
 
-    public void setCompletionId(Integer completionId) {
-        this.completionId = completionId;
+    public void setCompletionId(String completionId) {
+        this.completionId = completionId == null ? null : completionId.trim();
     }
 
-    public Integer getChoiceId() {
+    public String getChoiceId() {
         return choiceId;
     }
 
-    public void setChoiceId(Integer choiceId) {
-        this.choiceId = choiceId;
+    public void setChoiceId(String choiceId) {
+        this.choiceId = choiceId == null ? null : choiceId.trim();
     }
 
-    public Integer getJudgeId() {
+    public String getJudgeId() {
         return judgeId;
     }
 
-    public void setJudgeId(Integer judgeId) {
-        this.judgeId = judgeId;
+    public void setJudgeId(String judgeId) {
+        this.judgeId = judgeId == null ? null : judgeId.trim();
     }
 
-    public Integer getQueansId() {
+    public String getQueansId() {
         return queansId;
     }
 
-    public void setQueansId(Integer queansId) {
-        this.queansId = queansId;
+    public void setQueansId(String queansId) {
+        this.queansId = queansId == null ? null : queansId.trim();
     }
 
-    public Date getWrongDate() {
-        return wrongDate;
+    public String getExamtime() {
+        return examtime;
     }
 
-    public void setWrongDate(Date wrongDate) {
-        this.wrongDate = wrongDate;
+    public void setExamtime(String examtime) {
+        this.examtime = examtime == null ? null : examtime.trim();
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer == null ? null : answer.trim();
     }
 }

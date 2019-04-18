@@ -18,7 +18,7 @@
     <include refid="Base_Column_List" />
     from bank
     <if test="beginDate != null and endDate != null" >
-      where str_to_date(opendate, '%Y-%m-%d') &gt; #{beginDate} and str_to_date(opendate, '%Y-%m-%d') &lt; #{endDate}
+      where str_to_date(opendate, '%Y-%m-%d') &gt;= #{beginDate} and str_to_date(opendate, '%Y-%m-%d') &lt;= #{endDate}
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="com.examination.model.BankKey" resultMap="BaseResultMap">

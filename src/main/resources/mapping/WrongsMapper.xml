@@ -4,15 +4,31 @@
   <resultMap id="BaseResultMap" type="com.examination.model.Wrongs">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="completion_id" jdbcType="INTEGER" property="completionId" />
-    <result column="choice_id" jdbcType="INTEGER" property="choiceId" />
-    <result column="judge_id" jdbcType="INTEGER" property="judgeId" />
-    <result column="queans_id" jdbcType="INTEGER" property="queansId" />
-    <result column="wrong_date" jdbcType="TIMESTAMP" property="wrongDate" />
+    <result column="completion_id" jdbcType="VARCHAR" property="completionId" />
+    <result column="choice_id" jdbcType="VARCHAR" property="choiceId" />
+    <result column="judge_id" jdbcType="VARCHAR" property="judgeId" />
+    <result column="queans_id" jdbcType="VARCHAR" property="queansId" />
+    <result column="bank_id" jdbcType="VARCHAR" property="bankId" />
+    <result column="examtime" jdbcType="VARCHAR" property="examtime" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, completion_id, choice_id, judge_id, queans_id, wrong_date
+    id, user_id, completion_id, choice_id, judge_id, queans_id, examtime, answer,bank_id
   </sql>
+  <!-- 获取错题库列表 -->
+  <select id="getWrongsList" resultType="com.examination.model.Wrongs">
+    select w.examTime,count(1) wrongsum,w.user_id,w.bank_id from wrongs w
+    left join choice c on w.choice_id=c.id where w.answer&lt;&gt;c.choice_answer and w.user_id=#{userId}
+    <if test="examtime != '' and examtime != null">
+      and w.examTime=#{examtime}
+    </if>
+  </select>
+  <select id="selectByUserIdAndBankId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from wrongs
+    where user_id = #{userId,jdbcType=VARCHAR} and bank_id=#{bankId,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -26,10 +42,10 @@
   <insert id="insert" parameterType="com.examination.model.Wrongs">
     insert into wrongs (id, user_id, completion_id, 
       choice_id, judge_id, queans_id, 
-      wrong_date)
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{completionId,jdbcType=INTEGER}, 
-      #{choiceId,jdbcType=INTEGER}, #{judgeId,jdbcType=INTEGER}, #{queansId,jdbcType=INTEGER}, 
-      #{wrongDate,jdbcType=TIMESTAMP})
+      examtime, answer,bank_id)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{completionId,jdbcType=VARCHAR}, 
+      #{choiceId,jdbcType=VARCHAR}, #{judgeId,jdbcType=VARCHAR}, #{queansId,jdbcType=VARCHAR}, 
+      #{examtime,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}), #{bankId,jdbcType=VARCHAR}
   </insert>
   <insert id="insertSelective" parameterType="com.examination.model.Wrongs">
     insert into wrongs
@@ -52,8 +68,14 @@
       <if test="queansId != null">
         queans_id,
       </if>
-      <if test="wrongDate != null">
-        wrong_date,
+      <if test="examtime != null">
+        examtime,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="bankId != null">
+        bank_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -64,19 +86,25 @@
         #{userId,jdbcType=VARCHAR},
       </if>
       <if test="completionId != null">
-        #{completionId,jdbcType=INTEGER},
+        #{completionId,jdbcType=VARCHAR},
       </if>
       <if test="choiceId != null">
-        #{choiceId,jdbcType=INTEGER},
+        #{choiceId,jdbcType=VARCHAR},
       </if>
       <if test="judgeId != null">
-        #{judgeId,jdbcType=INTEGER},
+        #{judgeId,jdbcType=VARCHAR},
       </if>
       <if test="queansId != null">
-        #{queansId,jdbcType=INTEGER},
+        #{queansId,jdbcType=VARCHAR},
       </if>
-      <if test="wrongDate != null">
-        #{wrongDate,jdbcType=TIMESTAMP},
+      <if test="examtime != null">
+        #{examtime,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null">
+        #{bankId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -87,19 +115,25 @@
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="completionId != null">
-        completion_id = #{completionId,jdbcType=INTEGER},
+        completion_id = #{completionId,jdbcType=VARCHAR},
       </if>
       <if test="choiceId != null">
-        choice_id = #{choiceId,jdbcType=INTEGER},
+        choice_id = #{choiceId,jdbcType=VARCHAR},
       </if>
       <if test="judgeId != null">
-        judge_id = #{judgeId,jdbcType=INTEGER},
+        judge_id = #{judgeId,jdbcType=VARCHAR},
       </if>
       <if test="queansId != null">
-        queans_id = #{queansId,jdbcType=INTEGER},
+        queans_id = #{queansId,jdbcType=VARCHAR},
       </if>
-      <if test="wrongDate != null">
-        wrong_date = #{wrongDate,jdbcType=TIMESTAMP},
+      <if test="examtime != null">
+        examtime = #{examtime,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null">
+        bank_id = #{bankId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -107,11 +141,13 @@
   <update id="updateByPrimaryKey" parameterType="com.examination.model.Wrongs">
     update wrongs
     set user_id = #{userId,jdbcType=VARCHAR},
-      completion_id = #{completionId,jdbcType=INTEGER},
-      choice_id = #{choiceId,jdbcType=INTEGER},
-      judge_id = #{judgeId,jdbcType=INTEGER},
-      queans_id = #{queansId,jdbcType=INTEGER},
-      wrong_date = #{wrongDate,jdbcType=TIMESTAMP}
+      completion_id = #{completionId,jdbcType=VARCHAR},
+      choice_id = #{choiceId,jdbcType=VARCHAR},
+      judge_id = #{judgeId,jdbcType=VARCHAR},
+      queans_id = #{queansId,jdbcType=VARCHAR},
+      examtime = #{examtime,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

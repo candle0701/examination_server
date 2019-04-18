@@ -13,6 +13,16 @@ public class Bank extends BankKey {
 
     private String url;
 
+    private String ifDone;
+
+    public String getIfDone() {
+        return ifDone;
+    }
+
+    public void setIfDone(String ifDone) {
+        this.ifDone = ifDone;
+    }
+
     public String getUrl() {
         return url;
     }

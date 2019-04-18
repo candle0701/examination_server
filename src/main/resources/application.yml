@@ -17,3 +17,7 @@ mybatis:
   mapper-locations: classpath:mapping/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.examination.mapper: debug

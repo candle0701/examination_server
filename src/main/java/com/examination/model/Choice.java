@@ -3,39 +3,43 @@ package com.examination.model;
 public class Choice {
     private String id;
 
-    private String choiceTitleA;
+    private String choiceTitle;
 
-    private String choiceTitleB;
+    private String choiceA;
 
-    private String choiceTitleC;
+    private String choiceB;
 
-    private String choiceTitleD;
+    private String choiceC;
 
-    private String choiceTitleE;
+    private String choiceD;
 
-    private String choiceTitleF;
-
-    private String choiceTitleG;
-
-    private String choiceTitleH;
-
-    private String choiceTitleI;
+    private String choiceE;
 
     private String choiceAnswer;
 
     private Integer choiceSort;
 
-    private String choiceImg1;
+    private String choiceImgUrl1;
 
-    private String choiceImg2;
+    private String choiceImgUrl2;
 
-    private String choiceImg3;
+    private String choiceImgUrl3;
 
-    private String choiceImg4;
+    private String choiceImgUrl4;
 
-    private String choiceImg5;
+    private String examtime;
 
     private String grade;
+
+    private String answer;
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 
     public String getId() {
         return id;
@@ -45,76 +49,52 @@ public class Choice {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getChoiceTitleA() {
-        return choiceTitleA;
+    public String getChoiceTitle() {
+        return choiceTitle;
     }
 
-    public void setChoiceTitleA(String choiceTitleA) {
-        this.choiceTitleA = choiceTitleA == null ? null : choiceTitleA.trim();
+    public void setChoiceTitle(String choiceTitle) {
+        this.choiceTitle = choiceTitle == null ? null : choiceTitle.trim();
     }
 
-    public String getChoiceTitleB() {
-        return choiceTitleB;
+    public String getChoiceA() {
+        return choiceA;
     }
 
-    public void setChoiceTitleB(String choiceTitleB) {
-        this.choiceTitleB = choiceTitleB == null ? null : choiceTitleB.trim();
+    public void setChoiceA(String choiceA) {
+        this.choiceA = choiceA == null ? null : choiceA.trim();
     }
 
-    public String getChoiceTitleC() {
-        return choiceTitleC;
+    public String getChoiceB() {
+        return choiceB;
     }
 
-    public void setChoiceTitleC(String choiceTitleC) {
-        this.choiceTitleC = choiceTitleC == null ? null : choiceTitleC.trim();
+    public void setChoiceB(String choiceB) {
+        this.choiceB = choiceB == null ? null : choiceB.trim();
     }
 
-    public String getChoiceTitleD() {
-        return choiceTitleD;
+    public String getChoiceC() {
+        return choiceC;
     }
 
-    public void setChoiceTitleD(String choiceTitleD) {
-        this.choiceTitleD = choiceTitleD == null ? null : choiceTitleD.trim();
+    public void setChoiceC(String choiceC) {
+        this.choiceC = choiceC == null ? null : choiceC.trim();
     }
 
-    public String getChoiceTitleE() {
-        return choiceTitleE;
+    public String getChoiceD() {
+        return choiceD;
     }
 
-    public void setChoiceTitleE(String choiceTitleE) {
-        this.choiceTitleE = choiceTitleE == null ? null : choiceTitleE.trim();
+    public void setChoiceD(String choiceD) {
+        this.choiceD = choiceD == null ? null : choiceD.trim();
     }
 
-    public String getChoiceTitleF() {
-        return choiceTitleF;
+    public String getChoiceE() {
+        return choiceE;
     }
 
-    public void setChoiceTitleF(String choiceTitleF) {
-        this.choiceTitleF = choiceTitleF == null ? null : choiceTitleF.trim();
-    }
-
-    public String getChoiceTitleG() {
-        return choiceTitleG;
-    }
-
-    public void setChoiceTitleG(String choiceTitleG) {
-        this.choiceTitleG = choiceTitleG == null ? null : choiceTitleG.trim();
-    }
-
-    public String getChoiceTitleH() {
-        return choiceTitleH;
-    }
-
-    public void setChoiceTitleH(String choiceTitleH) {
-        this.choiceTitleH = choiceTitleH == null ? null : choiceTitleH.trim();
-    }
-
-    public String getChoiceTitleI() {
-        return choiceTitleI;
-    }
-
-    public void setChoiceTitleI(String choiceTitleI) {
-        this.choiceTitleI = choiceTitleI == null ? null : choiceTitleI.trim();
+    public void setChoiceE(String choiceE) {
+        this.choiceE = choiceE == null ? null : choiceE.trim();
     }
 
     public String getChoiceAnswer() {
@@ -133,44 +113,44 @@ public class Choice {
         this.choiceSort = choiceSort;
     }
 
-    public String getChoiceImg1() {
-        return choiceImg1;
+    public String getChoiceImgUrl1() {
+        return choiceImgUrl1;
     }
 
-    public void setChoiceImg1(String choiceImg1) {
-        this.choiceImg1 = choiceImg1 == null ? null : choiceImg1.trim();
+    public void setChoiceImgUrl1(String choiceImgUrl1) {
+        this.choiceImgUrl1 = choiceImgUrl1 == null ? null : choiceImgUrl1.trim();
     }
 
-    public String getChoiceImg2() {
-        return choiceImg2;
+    public String getChoiceImgUrl2() {
+        return choiceImgUrl2;
     }
 
-    public void setChoiceImg2(String choiceImg2) {
-        this.choiceImg2 = choiceImg2 == null ? null : choiceImg2.trim();
+    public void setChoiceImgUrl2(String choiceImgUrl2) {
+        this.choiceImgUrl2 = choiceImgUrl2 == null ? null : choiceImgUrl2.trim();
     }
 
-    public String getChoiceImg3() {
-        return choiceImg3;
+    public String getChoiceImgUrl3() {
+        return choiceImgUrl3;
     }
 
-    public void setChoiceImg3(String choiceImg3) {
-        this.choiceImg3 = choiceImg3 == null ? null : choiceImg3.trim();
+    public void setChoiceImgUrl3(String choiceImgUrl3) {
+        this.choiceImgUrl3 = choiceImgUrl3 == null ? null : choiceImgUrl3.trim();
     }
 
-    public String getChoiceImg4() {
-        return choiceImg4;
+    public String getChoiceImgUrl4() {
+        return choiceImgUrl4;
     }
 
-    public void setChoiceImg4(String choiceImg4) {
-        this.choiceImg4 = choiceImg4 == null ? null : choiceImg4.trim();
+    public void setChoiceImgUrl4(String choiceImgUrl4) {
+        this.choiceImgUrl4 = choiceImgUrl4 == null ? null : choiceImgUrl4.trim();
     }
 
-    public String getChoiceImg5() {
-        return choiceImg5;
+    public String getExamtime() {
+        return examtime;
     }
 
-    public void setChoiceImg5(String choiceImg5) {
-        this.choiceImg5 = choiceImg5 == null ? null : choiceImg5.trim();
+    public void setExamtime(String examtime) {
+        this.examtime = examtime == null ? null : examtime.trim();
     }
 
     public String getGrade() {

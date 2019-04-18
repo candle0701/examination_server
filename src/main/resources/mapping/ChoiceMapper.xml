@@ -3,38 +3,51 @@
 <mapper namespace="com.examination.mapper.ChoiceMapper">
   <resultMap id="BaseResultMap" type="com.examination.model.Choice">
     <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="choice_title_a" jdbcType="VARCHAR" property="choiceTitleA" />
-    <result column="choice_title_b" jdbcType="VARCHAR" property="choiceTitleB" />
-    <result column="choice_title_c" jdbcType="VARCHAR" property="choiceTitleC" />
-    <result column="choice_title_d" jdbcType="VARCHAR" property="choiceTitleD" />
-    <result column="choice_title_e" jdbcType="VARCHAR" property="choiceTitleE" />
-    <result column="choice_title_f" jdbcType="VARCHAR" property="choiceTitleF" />
-    <result column="choice_title_g" jdbcType="VARCHAR" property="choiceTitleG" />
-    <result column="choice_title_h" jdbcType="VARCHAR" property="choiceTitleH" />
-    <result column="choice_title_i" jdbcType="VARCHAR" property="choiceTitleI" />
+    <result column="choice_title" jdbcType="VARCHAR" property="choiceTitle" />
+    <result column="choice_a" jdbcType="VARCHAR" property="choiceA" />
+    <result column="choice_b" jdbcType="VARCHAR" property="choiceB" />
+    <result column="choice_c" jdbcType="VARCHAR" property="choiceC" />
+    <result column="choice_d" jdbcType="VARCHAR" property="choiceD" />
+    <result column="choice_e" jdbcType="VARCHAR" property="choiceE" />
     <result column="choice_answer" jdbcType="VARCHAR" property="choiceAnswer" />
     <result column="choice_sort" jdbcType="INTEGER" property="choiceSort" />
-    <result column="choice_img1" jdbcType="VARCHAR" property="choiceImg1" />
-    <result column="choice_img2" jdbcType="VARCHAR" property="choiceImg2" />
-    <result column="choice_img3" jdbcType="VARCHAR" property="choiceImg3" />
-    <result column="choice_img4" jdbcType="VARCHAR" property="choiceImg4" />
-    <result column="choice_img5" jdbcType="VARCHAR" property="choiceImg5" />
+    <result column="choice_img_url1" jdbcType="VARCHAR" property="choiceImgUrl1" />
+    <result column="choice_img_url2" jdbcType="VARCHAR" property="choiceImgUrl2" />
+    <result column="choice_img_url3" jdbcType="VARCHAR" property="choiceImgUrl3" />
+    <result column="choice_img_url4" jdbcType="VARCHAR" property="choiceImgUrl4" />
+    <result column="examTime" jdbcType="VARCHAR" property="examtime" />
     <result column="grade" jdbcType="VARCHAR" property="grade" />
   </resultMap>
+  <sql id="Base_Column_List">
+    id, choice_title, choice_a, choice_b, choice_c, choice_d,choice_e,choice_answer,
+    choice_sort,choice_img_url1,choice_img_url2,choice_img_url3,choice_img_url4,examTime,grade
+  </sql>
+  <!-- 获取已答内容 -->
+  <select id="getDoneAnswer" parameterType="java.lang.String" resultType="com.examination.model.Choice">
+    select c.choice_answer,c.choice_a,c.choice_b,c.choice_c,c.choice_d,c.choice_title,c.choice_img_url1,w.answer from bank b
+    left join wrongs w on b.id=w.bank_id left join choice c on w.choice_id=c.id
+    where w.bank_id = #{bankId} and w.user_id=#{userId}
+  </select>
+  <select id="selectByDateAndGrade" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from choice
+    <if test="examTime != null and grade != null" >
+      where examTime = #{examTime} and grade = #{grade}
+    </if>
+  </select>
   <insert id="insert" parameterType="com.examination.model.Choice">
-    insert into choice (id, choice_title_a, choice_title_b, 
-      choice_title_c, choice_title_d, choice_title_e, 
-      choice_title_f, choice_title_g, choice_title_h, 
-      choice_title_i, choice_answer, choice_sort, 
-      choice_img1, choice_img2, choice_img3, 
-      choice_img4, choice_img5, grade
+    insert into choice (id, choice_title, choice_a, 
+      choice_b, choice_c, choice_d, 
+      choice_e, choice_answer, choice_sort, 
+      choice_img_url1, choice_img_url2, choice_img_url3, 
+      choice_img_url4, examTime, grade
       )
-    values (#{id,jdbcType=VARCHAR}, #{choiceTitleA,jdbcType=VARCHAR}, #{choiceTitleB,jdbcType=VARCHAR}, 
-      #{choiceTitleC,jdbcType=VARCHAR}, #{choiceTitleD,jdbcType=VARCHAR}, #{choiceTitleE,jdbcType=VARCHAR}, 
-      #{choiceTitleF,jdbcType=VARCHAR}, #{choiceTitleG,jdbcType=VARCHAR}, #{choiceTitleH,jdbcType=VARCHAR}, 
-      #{choiceTitleI,jdbcType=VARCHAR}, #{choiceAnswer,jdbcType=VARCHAR}, #{choiceSort,jdbcType=INTEGER}, 
-      #{choiceImg1,jdbcType=VARCHAR}, #{choiceImg2,jdbcType=VARCHAR}, #{choiceImg3,jdbcType=VARCHAR}, 
-      #{choiceImg4,jdbcType=VARCHAR}, #{choiceImg5,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}
+    values (#{id,jdbcType=VARCHAR}, #{choiceTitle,jdbcType=VARCHAR}, #{choiceA,jdbcType=VARCHAR}, 
+      #{choiceB,jdbcType=VARCHAR}, #{choiceC,jdbcType=VARCHAR}, #{choiceD,jdbcType=VARCHAR}, 
+      #{choiceE,jdbcType=VARCHAR}, #{choiceAnswer,jdbcType=VARCHAR}, #{choiceSort,jdbcType=INTEGER}, 
+      #{choiceImgUrl1,jdbcType=VARCHAR}, #{choiceImgUrl2,jdbcType=VARCHAR}, #{choiceImgUrl3,jdbcType=VARCHAR}, 
+      #{choiceImgUrl4,jdbcType=VARCHAR}, #{examtime,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.examination.model.Choice">
@@ -43,32 +56,23 @@
       <if test="id != null">
         id,
       </if>
-      <if test="choiceTitleA != null">
-        choice_title_a,
+      <if test="choiceTitle != null">
+        choice_title,
       </if>
-      <if test="choiceTitleB != null">
-        choice_title_b,
+      <if test="choiceA != null">
+        choice_a,
       </if>
-      <if test="choiceTitleC != null">
-        choice_title_c,
+      <if test="choiceB != null">
+        choice_b,
       </if>
-      <if test="choiceTitleD != null">
-        choice_title_d,
+      <if test="choiceC != null">
+        choice_c,
       </if>
-      <if test="choiceTitleE != null">
-        choice_title_e,
+      <if test="choiceD != null">
+        choice_d,
       </if>
-      <if test="choiceTitleF != null">
-        choice_title_f,
-      </if>
-      <if test="choiceTitleG != null">
-        choice_title_g,
-      </if>
-      <if test="choiceTitleH != null">
-        choice_title_h,
-      </if>
-      <if test="choiceTitleI != null">
-        choice_title_i,
+      <if test="choiceE != null">
+        choice_e,
       </if>
       <if test="choiceAnswer != null">
         choice_answer,
@@ -76,20 +80,20 @@
       <if test="choiceSort != null">
         choice_sort,
       </if>
-      <if test="choiceImg1 != null">
-        choice_img1,
+      <if test="choiceImgUrl1 != null">
+        choice_img_url1,
       </if>
-      <if test="choiceImg2 != null">
-        choice_img2,
+      <if test="choiceImgUrl2 != null">
+        choice_img_url2,
       </if>
-      <if test="choiceImg3 != null">
-        choice_img3,
+      <if test="choiceImgUrl3 != null">
+        choice_img_url3,
       </if>
-      <if test="choiceImg4 != null">
-        choice_img4,
+      <if test="choiceImgUrl4 != null">
+        choice_img_url4,
       </if>
-      <if test="choiceImg5 != null">
-        choice_img5,
+      <if test="examtime != null">
+        examTime,
       </if>
       <if test="grade != null">
         grade,
@@ -99,32 +103,23 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="choiceTitleA != null">
-        #{choiceTitleA,jdbcType=VARCHAR},
+      <if test="choiceTitle != null">
+        #{choiceTitle,jdbcType=VARCHAR},
       </if>
-      <if test="choiceTitleB != null">
-        #{choiceTitleB,jdbcType=VARCHAR},
+      <if test="choiceA != null">
+        #{choiceA,jdbcType=VARCHAR},
       </if>
-      <if test="choiceTitleC != null">
-        #{choiceTitleC,jdbcType=VARCHAR},
+      <if test="choiceB != null">
+        #{choiceB,jdbcType=VARCHAR},
       </if>
-      <if test="choiceTitleD != null">
-        #{choiceTitleD,jdbcType=VARCHAR},
+      <if test="choiceC != null">
+        #{choiceC,jdbcType=VARCHAR},
       </if>
-      <if test="choiceTitleE != null">
-        #{choiceTitleE,jdbcType=VARCHAR},
+      <if test="choiceD != null">
+        #{choiceD,jdbcType=VARCHAR},
       </if>
-      <if test="choiceTitleF != null">
-        #{choiceTitleF,jdbcType=VARCHAR},
-      </if>
-      <if test="choiceTitleG != null">
-        #{choiceTitleG,jdbcType=VARCHAR},
-      </if>
-      <if test="choiceTitleH != null">
-        #{choiceTitleH,jdbcType=VARCHAR},
-      </if>
-      <if test="choiceTitleI != null">
-        #{choiceTitleI,jdbcType=VARCHAR},
+      <if test="choiceE != null">
+        #{choiceE,jdbcType=VARCHAR},
       </if>
       <if test="choiceAnswer != null">
         #{choiceAnswer,jdbcType=VARCHAR},
@@ -132,20 +127,20 @@
       <if test="choiceSort != null">
         #{choiceSort,jdbcType=INTEGER},
       </if>
-      <if test="choiceImg1 != null">
-        #{choiceImg1,jdbcType=VARCHAR},
+      <if test="choiceImgUrl1 != null">
+        #{choiceImgUrl1,jdbcType=VARCHAR},
       </if>
-      <if test="choiceImg2 != null">
-        #{choiceImg2,jdbcType=VARCHAR},
+      <if test="choiceImgUrl2 != null">
+        #{choiceImgUrl2,jdbcType=VARCHAR},
       </if>
-      <if test="choiceImg3 != null">
-        #{choiceImg3,jdbcType=VARCHAR},
+      <if test="choiceImgUrl3 != null">
+        #{choiceImgUrl3,jdbcType=VARCHAR},
       </if>
-      <if test="choiceImg4 != null">
-        #{choiceImg4,jdbcType=VARCHAR},
+      <if test="choiceImgUrl4 != null">
+        #{choiceImgUrl4,jdbcType=VARCHAR},
       </if>
-      <if test="choiceImg5 != null">
-        #{choiceImg5,jdbcType=VARCHAR},
+      <if test="examtime != null">
+        #{examtime,jdbcType=VARCHAR},
       </if>
       <if test="grade != null">
         #{grade,jdbcType=VARCHAR},
