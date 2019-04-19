@@ -7,7 +7,7 @@ public class Userinfo {
 
     private String password;
 
-    private Integer age;
+    private String age;
 
     private String province;
 
@@ -19,13 +19,33 @@ public class Userinfo {
 
     private String telephone;
 
-    private Integer gender;
+    private String gender;
 
     private String nickname;
 
     private String img;
 
     private String grade;
+
+    private String gradeIndex;
+
+    private String ageIndex;
+
+    public String getGradeIndex() {
+        return gradeIndex;
+    }
+
+    public void setGradeIndex(String gradeIndex) {
+        this.gradeIndex = gradeIndex;
+    }
+
+    public String getAgeIndex() {
+        return ageIndex;
+    }
+
+    public void setAgeIndex(String ageIndex) {
+        this.ageIndex = ageIndex;
+    }
 
     public String getId() {
         return id;
@@ -51,12 +71,12 @@ public class Userinfo {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setAge(String age) {
+        this.age = age == null ? null : age.trim();
     }
 
     public String getProvince() {
@@ -99,12 +119,12 @@ public class Userinfo {
         this.telephone = telephone == null ? null : telephone.trim();
     }
 
-    public Integer getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Integer gender) {
-        this.gender = gender;
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
     }
 
     public String getNickname() {

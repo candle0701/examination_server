@@ -1,7 +1,9 @@
 package com.examination.mapper;
 
 import com.examination.model.Userinfo;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserinfoMapper {
     int deleteByPrimaryKey(String id);
 
