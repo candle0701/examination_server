@@ -15,13 +15,28 @@
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="img" jdbcType="VARCHAR" property="img" />
     <result column="grade" jdbcType="VARCHAR" property="grade" />
-    <result column="grade_index" jdbcType="VARCHAR" property="gradeIndex" />
-    <result column="age_index" jdbcType="VARCHAR" property="ageIndex" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="session_key" jdbcType="VARCHAR" property="sessionKey" />
   </resultMap>
   <sql id="Base_Column_List">
     id, username, password, age, province, city, area, address, telephone, gender, nickname, 
-    img, grade,age_index,grade_index
+    img, grade,openid,session_key
   </sql>
+  <select id="getUserinfoByOpenid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from userinfo
+    where openid = #{openid,jdbcType=VARCHAR}
+  </select>
+  <select id="getUserinfoByUsernameAndPassword" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from userinfo
+    where username = #{username,jdbcType=VARCHAR}
+    <if test="password != null">
+      and password = #{password}
+    </if>
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -37,12 +52,12 @@
       age, province, city, 
       area, address, telephone, 
       gender, nickname, img, 
-      grade,grade_index,age_index)
+      grade,openid,session_key)
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{age,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
       #{gender,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
-      #{grade,jdbcType=VARCHAR}),#{gradeIndex},#{ageIndex}
+      #{grade,jdbcType=VARCHAR}),#{openid},#{session_key}
   </insert>
   <insert id="insertSelective" parameterType="com.examination.model.Userinfo">
     insert into userinfo
@@ -86,11 +101,11 @@
       <if test="grade != null">
         grade,
       </if>
-      <if test="gradeIndex != null">
-        grade_index,
+      <if test="openid != null">
+        openid,
       </if>
-      <if test="ageIndex != null">
-        age_index,
+      <if test="sessionKey != null">
+        session_key,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -133,11 +148,11 @@
       <if test="grade != null">
         #{grade,jdbcType=VARCHAR},
       </if>
-      <if test="gradeIndex != null">
-        #{gradeIndex,jdbcType=VARCHAR},
+      <if test="openid != null">
+        #{openid},
       </if>
-      <if test="ageIndex != null">
-        #{ageIndex,jdbcType=VARCHAR},
+      <if test="sessionKey != null">
+        #{sessionKey},
       </if>
     </trim>
   </insert>
@@ -180,11 +195,11 @@
       <if test="grade != null">
         grade = #{grade,jdbcType=VARCHAR},
       </if>
-      <if test="gradeIndex != null">
-        grade_index = #{gradeIndex,jdbcType=VARCHAR},
+      <if test="openid != null">
+        openid = #{openid},
       </if>
-      <if test="ageIndex != null">
-        age_index = #{ageIndex,jdbcType=VARCHAR},
+      <if test="sessionKey != null">
+        session_key = #{sessionKey},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -203,8 +218,8 @@
       nickname = #{nickname,jdbcType=VARCHAR},
       img = #{img,jdbcType=VARCHAR},
       grade = #{grade,jdbcType=VARCHAR},
-      grade_index = #{gradeIndex,jdbcType=VARCHAR},
-      age_index = #{ageIndex,jdbcType=VARCHAR}
+      openid = #{openid,jdbcType=VARCHAR},
+      session_key = #{sessionKey,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

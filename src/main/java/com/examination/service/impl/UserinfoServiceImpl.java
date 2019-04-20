@@ -6,6 +6,8 @@ import com.examination.service.UserinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserinfoServiceImpl implements UserinfoService {
     @Autowired
@@ -24,5 +26,15 @@ public class UserinfoServiceImpl implements UserinfoService {
     @Override
     public Userinfo selectByPrimaryKey(String id) {
         return userinfoMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Userinfo> getUserinfoByUsernameAndPassword(String username, String password) {
+        return userinfoMapper.getUserinfoByUsernameAndPassword(username,password);
+    }
+
+    @Override
+    public List<Userinfo> getUserinfoByOpenid(String openid) {
+        return userinfoMapper.getUserinfoByOpenid(openid);
     }
 }

@@ -27,24 +27,24 @@ public class Userinfo {
 
     private String grade;
 
-    private String gradeIndex;
+    private String openid;
 
-    private String ageIndex;
+    private String sessionKey;
 
-    public String getGradeIndex() {
-        return gradeIndex;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setGradeIndex(String gradeIndex) {
-        this.gradeIndex = gradeIndex;
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 
-    public String getAgeIndex() {
-        return ageIndex;
+    public String getSessionKey() {
+        return sessionKey;
     }
 
-    public void setAgeIndex(String ageIndex) {
-        this.ageIndex = ageIndex;
+    public void setSessionKey(String sessionKey) {
+        this.sessionKey = sessionKey;
     }
 
     public String getId() {

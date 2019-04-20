@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 19/04/2019 16:57:48
+ Date: 20/04/2019 16:22:46
 */
 
 SET NAMES utf8mb4;
@@ -88,23 +88,6 @@ CREATE TABLE `completion`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for csessioninfo
--- ----------------------------
-DROP TABLE IF EXISTS `csessioninfo`;
-CREATE TABLE `csessioninfo`  (
-  `open_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uuid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `skey` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `last_visit_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `session_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_info` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`open_id`) USING BTREE,
-  INDEX `openid`(`open_id`) USING BTREE,
-  INDEX `skey`(`skey`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '会话管理用户信息' ROW_FORMAT = Dynamic;
-
--- ----------------------------
 -- Table structure for judge
 -- ----------------------------
 DROP TABLE IF EXISTS `judge`;
@@ -148,7 +131,6 @@ CREATE TABLE `userinfo`  (
   `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `age_index` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `age` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `province` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `city` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -159,14 +141,16 @@ CREATE TABLE `userinfo`  (
   `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `grade` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `grade_index` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `openid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `session_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of userinfo
 -- ----------------------------
-INSERT INTO `userinfo` VALUES ('0325cc957a4b4cd0b6f8ed8ade49338d', NULL, NULL, '2', '8', '河南省', '三门峡市', '湖滨区', '八一路27', '130', '男', '李秘', NULL, '三', '2');
+INSERT INTO `userinfo` VALUES ('41154af27a4840eab08c2e66fdddf540', 'admin', '21232f297a57a5a743894a0e4a801fc3', '33', NULL, NULL, NULL, '瑞达路', '1388888888', '男', '黄骅', 'null', '2', NULL, NULL);
+INSERT INTO `userinfo` VALUES ('c7f860388e134a8cafec0c2df3ac31d2', NULL, NULL, '18', NULL, NULL, NULL, '郑州市大学路', '13888889999', '男', '阳阳', 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eq3opKxGyQia0G7IIEVjcJ6hK1l1M8G7zcQiaZgSJ9icVogchBmvviapdS7NfuNj3dibsnPPruqdZkkibwQ/132', '3', 'onrBK5DCj_iMlZpFdrFYy62PN3ew', '2yYN1KinxsgulRubJeTB+A==');
 
 -- ----------------------------
 -- Table structure for wrongs
@@ -188,7 +172,11 @@ CREATE TABLE `wrongs`  (
 -- ----------------------------
 -- Records of wrongs
 -- ----------------------------
+INSERT INTO `wrongs` VALUES ('4ef27dfc7e314f57ba9fe1e822103200', 'undefined', NULL, '33333', NULL, NULL, '2019-04-16', 'A', 'bank1');
 INSERT INTO `wrongs` VALUES ('6ddd970f56a8487fa64d585c54ff3b38', '0325cc957a4b4cd0b6f8ed8ade49338d', NULL, '44444', NULL, NULL, '2019-04-16', 'C', 'bank1');
+INSERT INTO `wrongs` VALUES ('77424d435db84829be73546e3d45c633', 'undefined', NULL, '22222', NULL, NULL, '2019-04-16', 'C', 'bank1');
+INSERT INTO `wrongs` VALUES ('93f31d8ad9c3451390ae5e5a56cf8cc5', 'undefined', NULL, '44444', NULL, NULL, '2019-04-16', 'B', 'bank1');
+INSERT INTO `wrongs` VALUES ('a319d34515804db2bbbd507f32396c34', 'undefined', NULL, '11111', NULL, NULL, '2019-04-16', 'D', 'bank1');
 INSERT INTO `wrongs` VALUES ('aa122e06f97645a8aa393c8945d1defc', '0325cc957a4b4cd0b6f8ed8ade49338d', NULL, '11111', NULL, NULL, '2019-04-16', 'D', 'bank1');
 INSERT INTO `wrongs` VALUES ('b06ca84a61c644de86ab0e340bad54a0', '0325cc957a4b4cd0b6f8ed8ade49338d', NULL, '22222', NULL, NULL, '2019-04-16', 'D', 'bank1');
 INSERT INTO `wrongs` VALUES ('cf654e84ed1c4392af9ea8ac36d61b75', '0325cc957a4b4cd0b6f8ed8ade49338d', NULL, '33333', NULL, NULL, '2019-04-16', 'C', 'bank1');
