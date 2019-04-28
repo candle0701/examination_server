@@ -11,7 +11,14 @@ spring:
     restart:
       enabled: true
       additional-paths: src/main/java
-
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: LEGACYHTML5
+    encoding: UTF-8
+    cache: false
+    servlet:
+      content-type: text/html
 mybatis:
   type-aliases-package: com.examination.model          # 定义所有操作类的别名所在包
   mapper-locations: classpath:mapping/*.xml
